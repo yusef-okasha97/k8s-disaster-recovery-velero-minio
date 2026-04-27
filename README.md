@@ -50,7 +50,8 @@ Before starting, ensure you have the following:
 │   └── test-app.yaml          # Sample workload for testing backups
 └── README.md                  # Main documentation
 
-📖 Step-by-Step Implementation
+
+## 📖 Step-by-Step Implementation
 Step 1: Setup MinIO Storage
 
 Run on your Storage VM:
