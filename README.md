@@ -10,97 +10,52 @@ This repository demonstrates a robust Disaster Recovery (DR) strategy for Kubern
 ![Velero](https://img.shields.io/badge/Velero-VMware-blue?style=for-the-badge)
 ![MinIO](https://img.shields.io/badge/MinIO-S3-red?style=for-the-badge&logo=minio&logoColor=white)
 
-## 🛠 Features
-- **Full Cluster Backup:** Captures all Kubernetes resources and metadata.
-- **Persistent Volume Backup:** Uses Velero Node-Agent (Restic/Kopia) for File-System backups.
-- **On-Premise S3 Storage:** Leverages MinIO as a high-performance S3-compatible backend.
-- **Automated Scheduling:** Daily backup cron jobs for zero-touch protection.
+# 🚀 Kubernetes Disaster Recovery: Velero & MinIO Integration
 
-## 🏗 Architecture
-### The setup consists of:
-1. **Source Cluster:** Any K8s cluster (EKS, K3s, or Kubeadm).
-2. **Backup Server:** A separate VM running MinIO Server.
-3. **Velero:** Installed on the cluster to orchestrate the backup/restore process.
+![Kubernetes](https://img.shields.io/badge/kubernetes-%23326ce5.svg?style=for-the-badge&logo=kubernetes&logoColor=white)
+![Velero](https://img.shields.io/badge/Velero-VMware-blue?style=for-the-badge)
+![MinIO](https://img.shields.io/badge/MinIO-S3-red?style=for-the-badge&logo=minio&logoColor=white)
 
-📖 **Step-by-Step Implementation
-Step 1: Prepare the Backup Storage (MinIO)
-```
-On your Storage VM (e.g., 192.168.1.100), we install MinIO to act as our S3-Compatible vault. 
-```
+A comprehensive guide to implementing a **Disaster Recovery (DR)** strategy for Kubernetes clusters. This project utilizes **Velero** for cluster-state backups and **MinIO** as an on-premise, S3-compatible storage backend.
 
-Install MinIO Binary:
+---
 
-Bash
-wget [https://dl.min.io/server/minio/release/linux-amd64/minio](https://dl.min.io/server/minio/release/linux-amd64/minio)
-chmod +x minio
-sudo mv minio /usr/local/bin/
-Setup Systemd Service: (Check scripts/install-minio.sh for full automation).
+## 📋 Table of Contents
+- [Architecture Overview](#-architecture-overview)
+- [Prerequisites](#-prerequisites)
+- [Project Structure](#-project-structure)
+- [Step-by-Step Implementation](#-step-by-step-implementation)
+  - [Step 1: Setup MinIO Storage](#step-1-setup-minio-storage)
+  - [Step 2: Install Velero CLI & Cluster Setup](#step-2-install-velero-cli--cluster-setup)
+  - [Step 3: Perform Backup Operations](#step-3-perform-backup-operations)
+  - [Step 4: Restore & Recovery](#step-4-restore--recovery)
+- [Best Practices](#-best-practices)
 
-Configure Access:
+---
 
-Console: http://192.168.1.100:9001
+## 🏗 Architecture Overview
+The backup workflow captures both Kubernetes API resources and Persistent Volume data, streaming them securely to a remote MinIO instance.
 
-Default Login: minioadmin / minioadmin
 
-Action Required: Create a bucket named velero-backups.
 
-Step 2: Install Velero on Kubernetes
-On your Master Node/Control Plane, configure Velero to point to your MinIO server.
+---
 
-Create Credentials File (credentials-velero):
+## 🛠 Prerequisites
+Before starting, ensure you have the following:
+- **Kubernetes Cluster** (v1.20+)
+- **Dedicated VM** for Storage (Ubuntu 22.04 recommended)
+- **kubectl** configured for your cluster
+- **Network connectivity** between the cluster and the Storage VM on ports 9000/9001
 
-Ini, TOML
-[default]
-aws_access_key_id = minioadmin
-aws_secret_access_key = minioadmin
-Execute Installation:
+---
 
-Bash
-velero install \
-  --provider aws \
-  --plugins velero/velero-plugin-for-aws:v1.9.0 \
-  --bucket velero-backups \
-  --secret-file ./credentials-velero \
-  --use-node-agent \
-  --use-volume-snapshots=false \
-  --backup-location-config region=minio,s3ForcePathStyle="true",s3Url=[http://192.168.1.100:9000](http://192.168.1.100:9000)
-Note: --use-node-agent is mandatory to back up Persistent Volume data via File-System Backup.
-
-Step 3: Performing Backups
-Capture the entire cluster state or specific workloads.
-
-Manual Full Backup (Resources + Data):
-
-Bash
-velero backup create full-cluster-backup --default-volumes-to-fs-backup
-Check Backup Status:
-
-Bash
-velero backup describe full-cluster-backup
-Step 4: The Recovery (Restore)
-If your cluster fails or you need to migrate to a new environment:
-
-Connect to the New Cluster.
-
-Re-install Velero using the same command in Step 2.
-
-Trigger the Restoration:
-
-Bash
-# View available backups synced from MinIO
-velero backup get
-
-# Restore everything from the specific backup
-velero restore create --from-backup full-cluster-backup
-🛡 Best Practices & Maintenance
-TTL (Time to Live): Save storage by setting an expiration date (e.g., 30 days):
---ttl 720h0m0s
-
-Schedules: Automate backups with Cron syntax:
-
-Bash
-velero schedule create daily-bkp --schedule="0 2 * * *"
-Monitoring: Check for volume-level errors:
-
-Bash
-velero backup logs <backup-name>
+## 📂 Project Structure
+```text
+.
+├── scripts/
+│   ├── install-minio.sh       # Automates MinIO Server installation
+│   └── velero-install.sh      # Velero cluster configuration script
+├── manifests/
+│   ├── credentials-velero     # IAM-style credentials template
+│   └── test-app.yaml          # Sample workload for testing backups
+└── README.md                  # Main documentation
