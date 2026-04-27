@@ -58,7 +58,8 @@ Before starting, ensure you have the following:
 Run these commands on your **Storage VM** to prepare the S3-compatible backend.
 
 # 1. Download and Install MinIO
-```wget [https://dl.min.io/server/minio/release/linux-amd64/minio](https://dl.min.io/server/minio/release/linux-amd64/minio)
+```
+wget [https://dl.min.io/server/minio/release/linux-amd64/minio](https://dl.min.io/server/minio/release/linux-amd64/minio)
 chmod +x minio
 sudo mv minio /usr/local/bin/
 ```
