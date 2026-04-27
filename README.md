@@ -22,9 +22,11 @@ This repository demonstrates a robust Disaster Recovery (DR) strategy for Kubern
 2. **Backup Server:** A separate VM running MinIO Server.
 3. **Velero:** Installed on the cluster to orchestrate the backup/restore process.
 
-##📖 Step-by-Step Implementation
+**📖 Step-by-Step Implementation
 Step 1: Prepare the Backup Storage (MinIO)
-On your Storage VM (e.g., 192.168.1.100), we install MinIO to act as our S3-Compatible vault.
+```
+On your Storage VM (e.g., 192.168.1.100), we install MinIO to act as our S3-Compatible vault. 
+```
 
 Install MinIO Binary:
 
