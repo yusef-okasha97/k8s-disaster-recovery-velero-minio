@@ -52,9 +52,17 @@ Before starting, ensure you have the following:
 ```
 
 
----
+## 📖 Step-by-Step Implementation
 
-## 🏗 Architecture Overview
-The backup workflow captures both Kubernetes API resources and Persistent Volume data, streaming them securely to a remote MinIO instance.
+### Step 1: Setup MinIO Storage
+Run these commands on your **Storage VM** to prepare the S3-compatible backend.
 
----
+```bash
+# 1. Download and Install MinIO
+wget [https://dl.min.io/server/minio/release/linux-amd64/minio](https://dl.min.io/server/minio/release/linux-amd64/minio)
+chmod +x minio
+sudo mv minio /usr/local/bin/
+
+# 2. Start MinIO Server (Replace with your storage path)
+mkdir -p ~/minio_data
+minio server ~/minio_data --console-address ":9001"
