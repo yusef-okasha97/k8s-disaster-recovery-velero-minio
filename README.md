@@ -50,17 +50,24 @@ Before starting, ensure you have the following:
 │   └── test-app.yaml          # Sample workload for testing backups
 └── README.md                  # Main documentation
 
-## 📖 Step-by-Step Implementation
+📖 Step-by-Step Implementation
+Step 1: Setup MinIO Storage
 
-### Step 1: Setup MinIO Storage
-Run these commands on your **Storage VM** to prepare the S3-compatible backend.
+Run on your Storage VM:
 
-```bash
-# 1. Download and Install MinIO
-wget [https://dl.min.io/server/minio/release/linux-amd64/minio](https://dl.min.io/server/minio/release/linux-amd64/minio)
+# Download MinIO
+wget https://dl.min.io/server/minio/release/linux-amd64/minio
 chmod +x minio
 sudo mv minio /usr/local/bin/
 
-# 2. Start MinIO Server (Replace with your storage path)
+# Start MinIO Server
 mkdir -p ~/minio_data
 minio server ~/minio_data --console-address ":9001"
+
+🔗 Open:
+
+http://<VM_IP>:9001
+Login: minioadmin / minioadmin
+Create bucket: velero-backups
+
+
