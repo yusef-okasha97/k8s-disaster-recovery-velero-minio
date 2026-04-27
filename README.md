@@ -49,7 +49,7 @@ Before starting, ensure you have the following:
 │   ├── credentials-velero     # IAM-style credentials template
 │   └── test-app.yaml          # Sample workload for testing backups
 └── README.md                  # Main documentation
-
+```
 
 
 ---
