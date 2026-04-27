@@ -49,26 +49,12 @@ Before starting, ensure you have the following:
 │   ├── credentials-velero     # IAM-style credentials template
 │   └── test-app.yaml          # Sample workload for testing backups
 └── README.md                  # Main documentation
+
+
+
 ---
 
-## 📖 Step-by-Step Implementation
-Step 1: Setup MinIO Storage
+## 🏗 Architecture Overview
+The backup workflow captures both Kubernetes API resources and Persistent Volume data, streaming them securely to a remote MinIO instance.
 
-Run on your Storage VM:
-
-# Download MinIO
-wget https://dl.min.io/server/minio/release/linux-amd64/minio
-chmod +x minio
-sudo mv minio /usr/local/bin/
-
-# Start MinIO Server
-mkdir -p ~/minio_data
-minio server ~/minio_data --console-address ":9001"
-
-🔗 Open:
-
-http://<VM_IP>:9001
-Login: minioadmin / minioadmin
-Create bucket: velero-backups
-
-
+---
