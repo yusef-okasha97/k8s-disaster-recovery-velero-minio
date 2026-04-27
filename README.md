@@ -2,15 +2,7 @@
 A production-grade setup for Kubernetes Disaster Recovery using Velero and MinIO as an S3-compatible local storage. Features automated scheduled backups and full-state restoration for cluster resources and persistent volumes.
 
 
-# Kubernetes Disaster Recovery (Velero & MinIO)
-
-This repository demonstrates a robust Disaster Recovery (DR) strategy for Kubernetes clusters using **Velero** and **MinIO**. It focuses on an on-premise/hybrid approach where backups are stored on a separate dedicated VM instead of public cloud buckets.
-
-![Kubernetes](https://img.shields.io/badge/kubernetes-%23326ce5.svg?style=for-the-badge&logo=kubernetes&logoColor=white)
-![Velero](https://img.shields.io/badge/Velero-VMware-blue?style=for-the-badge)
-![MinIO](https://img.shields.io/badge/MinIO-S3-red?style=for-the-badge&logo=minio&logoColor=white)
-
-# 🚀 Kubernetes Disaster Recovery: Velero & MinIO Integration
+# Kubernetes Disaster Recovery: Velero & MinIO Integration
 
 ![Kubernetes](https://img.shields.io/badge/kubernetes-%23326ce5.svg?style=for-the-badge&logo=kubernetes&logoColor=white)
 ![Velero](https://img.shields.io/badge/Velero-VMware-blue?style=for-the-badge)
@@ -35,8 +27,6 @@ A comprehensive guide to implementing a **Disaster Recovery (DR)** strategy for 
 
 ## 🏗 Architecture Overview
 The backup workflow captures both Kubernetes API resources and Persistent Volume data, streaming them securely to a remote MinIO instance.
-
-
 
 ---
 
