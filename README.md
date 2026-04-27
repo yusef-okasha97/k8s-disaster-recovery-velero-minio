@@ -22,10 +22,22 @@ The setup consists of:
 2. **Backup Server:** A separate VM running MinIO Server.
 3. **Velero:** Installed on the cluster to orchestrate the backup/restore process.
 
-## 🚀 Quick Start
+📖 Step-by-Step Implementation
+Step 1: Prepare the Backup Storage (MinIO)
+On your Storage VM (e.g., 192.168.1.100), we install MinIO to act as our S3-Compatible vault.
 
-### 1. Setup MinIO (Backup Server)
-On your storage VM, run the installation script:
-```bash
-# Example command to run your custom script
-./scripts/install-minio.sh
+Install MinIO Binary:
+
+Bash
+wget [https://dl.min.io/server/minio/release/linux-amd64/minio](https://dl.min.io/server/minio/release/linux-amd64/minio)
+chmod +x minio
+sudo mv minio /usr/local/bin/
+Setup Systemd Service: (Check scripts/install-minio.sh for full automation).
+
+Configure Access:
+
+Access Console: http://192.168.1.100:9001
+
+Default Login: minioadmin / minioadmin
+
+Crucial: Create a bucket named velero-backups.
