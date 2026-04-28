@@ -66,6 +66,17 @@ sudo mv minio /usr/local/bin/
 
 # 2. Start MinIO Server (Replace with your storage path)
 ```
-mkdir -p ~/minio_data
-minio server ~/minio_data --console-address ":9001"
+sudo mkdir -p /mnt/minio_data
+sudo chown minio-user:minio-user /mnt/minio_data
+```
+# 3. Preparing the configuration file
+We will create a file in which we define the Access Key and the Secret Key (which Velero will use):
+```sudo vim /etc/default/minio
+```
+Copy these settings into it:
+```
+MINIO_ROOT_USER=minioadmin
+MINIO_ROOT_PASSWORD=minioadmin
+MINIO_VOLUMES="/mnt/minio_data"
+MINIO_OPTS="--address :9000 --console-address :9001"
 ```
