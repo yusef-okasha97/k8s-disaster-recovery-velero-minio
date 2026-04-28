@@ -106,13 +106,13 @@ Now open your browser and go to: localhost:9001
 
 ### step-2-install-velero-cli--cluster-setup
   
-   # 1. If you haven't installed it yet on your machine (the machine you use to control the cluster):
+**1. The machine you use to control the cluster**
 ```
 wget https://github.com/vmware-tanzu/velero/releases/download/v1.12.0/velero-v1.12.0-linux-amd64.tar.gz
 tar -xvf velero-v1.12.0-linux-amd64.tar.gz
 sudo mv velero-v1.12.0-linux-amd64/velero /usr/local/bin/
 ```
- # 2. Step 3: Install Velero inside the cluster.
+ **2. Step 3: Install Velero inside the cluster.**
 
 This is the "main" command that will link the cluster to the other machines (those running MinIO).
 Note: Replace 192.168.1.100 with the IP address of the other machine's "destination VM ".
@@ -126,12 +126,12 @@ velero install \
   --use-volume-snapshots=false \
   --backup-location-config region=minio,s3ForcePathStyle="true",s3Url=http://192.168.1.100:9000
 ```
-# 3. the first thing we need to do is make sure that the "pipe" is properly connected between the cluster and the other machine:
+**The first thing we need to do is make sure that the "pipe" is properly connected between the cluster and the other machine:**
 
 ```
    velero backup-location get
  ```
-# 4. If you want to back up the entire cluster (with all namespaces) and take a backup with File System Backup enabled.
+**4. If you want to back up the entire cluster (with all namespaces) and take a backup with File System Backup enabled.**
 
 ```
 velero backup create full-cluster-with-data --default-volumes-to-fs-backup
