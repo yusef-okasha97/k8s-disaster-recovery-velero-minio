@@ -112,7 +112,7 @@ wget https://github.com/vmware-tanzu/velero/releases/download/v1.12.0/velero-v1.
 tar -xvf velero-v1.12.0-linux-amd64.tar.gz
 sudo mv velero-v1.12.0-linux-amd64/velero /usr/local/bin/
 ```
- **2. Step 3: Install Velero inside the cluster.**
+ **2. Install Velero inside the cluster.**
 
 This is the "main" command that will link the cluster to the other machines (those running MinIO).
 Note: Replace 192.168.1.100 with the IP address of the other machine's "destination VM ".
