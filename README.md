@@ -150,3 +150,12 @@ velero backup get
 ```
 ## Step 3: Restore & Recovery
   ### step-3-restore--recovery)
+Install the Velero tool on the new cluster "with old config." after do this and you can see the backet try to run the below command 
+  **1. Get backup  name**
+  ```
+  velero backup get 
+ ```
+  **2. If the old backup we made previously appears, start the restore immediately by:**
+  ```
+  velero restore create --from-backup <Backup name>
+  ```
