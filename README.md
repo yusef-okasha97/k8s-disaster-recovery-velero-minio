@@ -113,8 +113,31 @@ sudo systemctl start minio
 # 6. Final Step (Very Important)
 Now open your browser and go to: localhost:9001
 
- 1.Log in as minioadmin /minioadmin.
+ 1. Log in as minioadmin /minioadmin.
 
  2. From the sidebar, select Buckets.
 
  3. Click Create Bucket and name it velero-backups.
+
+### step-2-install-velero-cli--cluster-setup
+  
+   # 1. If you haven't installed it yet on your machine (the machine you use to control the cluster):
+```
+wget https://github.com/vmware-tanzu/velero/releases/download/v1.12.0/velero-v1.12.0-linux-amd64.tar.gz
+tar -xvf velero-v1.12.0-linux-amd64.tar.gz
+sudo mv velero-v1.12.0-linux-amd64/velero /usr/local/bin/
+```
+ # 2. Step 3: Install Velero inside the cluster.
+
+This is the "main" command that will link the cluster to the other machines (those running MinIO).
+Note: Replace 192.168.1.100 with the IP address of the other machine's "destination VM ".
+```
+velero install \
+  --use-node-agent \
+  --provider aws \
+  --plugins velero/velero-plugin-for-aws:v1.9.0 \
+  --bucket velero-backups \
+  --secret-file ./credentials-velero \
+  --use-volume-snapshots=false \
+  --backup-location-config region=minio,s3ForcePathStyle="true",s3Url=http://192.168.1.100:9000
+```
