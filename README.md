@@ -104,3 +104,9 @@ Restart=always
 [Install]
 WantedBy=multi-user.target
 ```
+# 5. Server startup
+```
+sudo systemctl daemon-reload
+sudo systemctl enable minio
+sudo systemctl start minio
+```
