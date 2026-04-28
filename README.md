@@ -131,7 +131,7 @@ sudo mv velero-v1.12.0-linux-amd64/velero /usr/local/bin/
 
 This is the "main" command that will link the cluster to the other machines (those running MinIO).
 
-# Note: Replace 192.168.1.100 with the IP address of the other machine's "destination VM ".
+**Note: Replace 192.168.1.100 with the IP address of the other machine's "destination VM ".**
 ```
 velero install \
   --use-node-agent \
