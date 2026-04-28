@@ -105,7 +105,7 @@ Now open your browser and go to: localhost:9001
  3. Click Create Bucket and name it velero-backups.
 
 ## Step 2: Install Velero CLI & Cluster Setup
-### step-2-install-velero-cli--cluster-setup
+### step-1-install-velero-cli--cluster-setup
   
 **1. The machine you use to control the cluster**
 ```
