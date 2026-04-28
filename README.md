@@ -106,17 +106,32 @@ Now open your browser and go to: localhost:9001
 
 ## Step 2: Install Velero CLI & Cluster Setup
 ### step-1-install-velero-cli--cluster-setup
-  
-**1. The machine you use to control the cluster**
+
+**1. First step: Preparing the Credentials file**
+Before installing anything, we need to create a small file that tells Velero how to access the MinIO (or the S3 if using Cloud).
+
+Open Terminal and create a file named **credentials-velero**:
+```
+Vim credentials-velero
+```
+Put this data in it (replace the values ​​with the ones you have in MinIO):
+```
+[default]
+aws_access_key_id = minioadmin
+aws_secret_access_key = minioadmin
+```
+
+**2. install-velero-cli--cluster-setup on the machine you use to control the cluster**
 ```
 wget https://github.com/vmware-tanzu/velero/releases/download/v1.12.0/velero-v1.12.0-linux-amd64.tar.gz
 tar -xvf velero-v1.12.0-linux-amd64.tar.gz
 sudo mv velero-v1.12.0-linux-amd64/velero /usr/local/bin/
 ```
- **2. Install Velero inside the cluster.**
+ **3. Install Velero inside the cluster.**
 
 This is the "main" command that will link the cluster to the other machines (those running MinIO).
-Note: Replace 192.168.1.100 with the IP address of the other machine's "destination VM ".
+
+# Note: Replace 192.168.1.100 with the IP address of the other machine's "destination VM ".
 ```
 velero install \
   --use-node-agent \
@@ -132,7 +147,7 @@ velero install \
 ```
    velero backup-location get
  ```
-**If you want to back up the entire cluster (with all namespaces) and take a backup with File System Backup enabled.**
+**If you want to back up the entire cluster (with all namespaces), take a backup with File System Backup enabled.**
 
 ```
 velero backup create full-cluster-with-data --default-volumes-to-fs-backup
@@ -150,7 +165,7 @@ velero backup get
 ```
 ## Step 3: Restore & Recovery
   ### step-3-restore--recovery)
-Install the Velero tool on the new cluster "with old config." after do this and you can see the backet try to run the below command 
+Install the Velero tool on the new cluster "with old config." After doing this, you can see the bucket try to run the below command 
   **1. Get backup  name**
   ```
   velero backup get 
