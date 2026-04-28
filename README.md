@@ -42,19 +42,19 @@ Before starting, ensure you have the following:
 ### Step 1: Setup MinIO Storage
 Run these commands on your **Storage VM** to prepare the S3-compatible backend.
 
-# 1. Download and Install MinIO
+**1. Download and Install MinIO**
 ```
 wget [https://dl.min.io/server/minio/release/linux-amd64/minio](https://dl.min.io/server/minio/release/linux-amd64/minio)
 chmod +x minio
 sudo mv minio /usr/local/bin/
 ```
 
-# 2. Start MinIO Server (Replace with your storage path)
+**2. Start MinIO Server (Replace with your storage path)**
 ```
 sudo mkdir -p /mnt/minio_data
 sudo chown minio-user:minio-user /mnt/minio_data
 ```
-# 3. Preparing the configuration file
+**3. Preparing the configuration file**
 We will create a file in which we define the Access Key and the Secret Key (which Velero will use):
 ```
 sudo vim /etc/default/minio
@@ -66,7 +66,7 @@ MINIO_ROOT_PASSWORD=minioadmin
 MINIO_VOLUMES="/mnt/minio_data"
 MINIO_OPTS="--address :9000 --console-address :9001"
 ```
-# 4.Create a Systemd Service
+**4.Create a Systemd Service**
 So that MinIO runs as a background service:
 ```
 sudo nano /etc/systemd/system/minio.service
@@ -89,13 +89,13 @@ Restart=always
 [Install]
 WantedBy=multi-user.target
 ```
-# 5. Server startup
+**5. Server startup**
 ```
 sudo systemctl daemon-reload
 sudo systemctl enable minio
 sudo systemctl start minio
 ```
-# 6. Final Step (Very Important)
+**6. Final Step (Very Important)**
 Now open your browser and go to: localhost:9001
 
  1. Log in as minioadmin /minioadmin.
