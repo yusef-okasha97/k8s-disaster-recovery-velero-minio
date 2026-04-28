@@ -131,18 +131,19 @@ velero install \
 ```
    velero backup-location get
  ```
-**4. If you want to back up the entire cluster (with all namespaces) and take a backup with File System Backup enabled.**
+**If you want to back up the entire cluster (with all namespaces) and take a backup with File System Backup enabled.**
 
 ```
 velero backup create full-cluster-with-data --default-volumes-to-fs-backup
 ```
- If you want to back up a specific application (one namespace):
+ **If you want to back up a specific application (one namespace):**
  Replace my-app with your namespace.
+ 
 ```
 velero backup create app-backup --include-namespaces my-app
 ```
 
-3. To confirm that the backup was completed successfully:
+**To confirm that the backup was completed successfully:**
 ```
 velero backup get
 ```
