@@ -71,7 +71,8 @@ sudo chown minio-user:minio-user /mnt/minio_data
 ```
 # 3. Preparing the configuration file
 We will create a file in which we define the Access Key and the Secret Key (which Velero will use):
-```sudo vim /etc/default/minio
+```
+sudo vim /etc/default/minio
 ```
 Copy these settings into it:
 ```
