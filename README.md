@@ -81,3 +81,26 @@ MINIO_ROOT_PASSWORD=minioadmin
 MINIO_VOLUMES="/mnt/minio_data"
 MINIO_OPTS="--address :9000 --console-address :9001"
 ```
+# 4.Create a Systemd Service
+So that MinIO runs as a background service:
+```
+sudo nano /etc/systemd/system/minio.service
+```
+Copy this content:
+```
+[Unit]
+Description=MinIO
+Documentation=https://docs.min.io
+Wants=network-online.target
+After=network-online.target
+
+[Service]
+User=minio-user
+Group=minio-user
+EnvironmentFile=/etc/default/minio
+ExecStart=/usr/local/bin/minio server $MINIO_OPTS $MINIO_VOLUMES
+Restart=always
+
+[Install]
+WantedBy=multi-user.target
+```
