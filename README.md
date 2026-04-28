@@ -19,9 +19,7 @@ A comprehensive guide to implementing a **Disaster Recovery (DR)** strategy for 
 - [Step-by-Step Implementation](#-step-by-step-implementation)
   - [Step 1: Setup MinIO Storage](#step-1-setup-minio-storage)
   - [Step 2: Install Velero CLI & Cluster Setup](#step-2-install-velero-cli--cluster-setup)
-  - [Step 3: Perform Backup Operations](#step-3-perform-backup-operations)
-  - [Step 4: Restore & Recovery](#step-4-restore--recovery)
-- [Best Practices](#-best-practices)
+  - [Step 3: Restore & Recovery](#step-4-restore--recovery)
 
 ---
 
@@ -141,3 +139,24 @@ velero install \
   --use-volume-snapshots=false \
   --backup-location-config region=minio,s3ForcePathStyle="true",s3Url=http://192.168.1.100:9000
 ```
+# 3. the first thing we need to do is make sure that the "pipe" is properly connected between the cluster and the other machine:
+
+```
+   velero backup-location get
+ ```
+# 4. If you want to back up the entire cluster (with all namespaces) and take a backup with File System Backup enabled.
+
+```
+velero backup create full-cluster-with-data --default-volumes-to-fs-backup
+```
+ If you want to back up a specific application (one namespace):
+ Replace my-app with your namespace.
+```
+velero backup create app-backup --include-namespaces my-app
+```
+
+3. To confirm that the backup was completed successfully:
+```
+velero backup get
+```
+
