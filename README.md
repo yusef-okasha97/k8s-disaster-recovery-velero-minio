@@ -19,7 +19,7 @@ A comprehensive guide to implementing a **Disaster Recovery (DR)** strategy for 
 - [Step-by-Step Implementation](#-step-by-step-implementation)
   - [Step 1: Setup MinIO Storage](#step-1-setup-minio-storage)
   - [Step 2: Install Velero CLI & Cluster Setup](#step-2-install-velero-cli--cluster-setup)
-  - [Step 3: Restore & Recovery](#step-4-restore--recovery)
+  - [Step 3: Restore & Recovery](#step-3-restore--recovery)
 
 ---
 
@@ -104,6 +104,7 @@ Now open your browser and go to: localhost:9001
 
  3. Click Create Bucket and name it velero-backups.
 
+## Step 2: Install Velero CLI & Cluster Setup
 ### step-2-install-velero-cli--cluster-setup
   
 **1. The machine you use to control the cluster**
@@ -147,4 +148,5 @@ velero backup create app-backup --include-namespaces my-app
 ```
 velero backup get
 ```
-
+## Step 3: Restore & Recovery
+  ### step-3-restore--recovery)
