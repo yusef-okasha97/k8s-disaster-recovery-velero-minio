@@ -113,8 +113,8 @@ sudo systemctl start minio
 # 6. Final Step (Very Important)
 Now open your browser and go to: localhost:9001
 
-Log in as minioadmin /minioadmin.
+ 1.Log in as minioadmin /minioadmin.
 
-From the sidebar, select Buckets.
+ 2. From the sidebar, select Buckets.
 
-Click Create Bucket and name it velero-backups.
+ 3. Click Create Bucket and name it velero-backups.
