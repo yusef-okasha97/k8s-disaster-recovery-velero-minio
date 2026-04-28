@@ -37,19 +37,6 @@ Before starting, ensure you have the following:
 
 ---
 
-## 📂 Project Structure
-```text
-.
-├── scripts/
-│   ├── install-minio.sh       # Automates MinIO Server installation
-│   └── velero-install.sh      # Velero cluster configuration script
-├── manifests/
-│   ├── credentials-velero     # IAM-style credentials template
-│   └── test-app.yaml          # Sample workload for testing backups
-└── README.md                  # Main documentation
-```
-
-
 ## 📖 Step-by-Step Implementation
 
 ### Step 1: Setup MinIO Storage
